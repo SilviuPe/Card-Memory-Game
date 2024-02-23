@@ -4,7 +4,7 @@ pygame.init()
 
 
 class Image:
-    def __init__(self,image_path : str, size : tuple, rotation_angle : int, position : list, screen : object, opacity = 255) -> None:
+    def __init__(self,image_path : str, size : int, rotation_angle : int, position : list, screen : object, opacity = 255) -> None:
         self.size = size 
         self.rotation_angle = rotation_angle
         self.position = position
@@ -18,7 +18,18 @@ class Image:
         self.image.set_alpha(self.opacity)
         self.get_position()
 
-
+        # Setup the size for the image. 
+        # The size is defined by %. 
+        # Is the size = 50 that mean 50% will be the size for the image from the actual image
+        if self.size:
+            new_size = list(self.image.get_size())
+            new_size[0] = int(new_size[0] * self.size/100)
+            new_size[1] = int(new_size[1] * self.size/100)
+            self.image = pygame.transform.scale(self.image,new_size)
+        
+        # Setup the rotation_angle for image. 
+        if self.rotation_angle:
+            self.image = pygame.transform.rotate(self.image,self.rotation_angle)
 
     """ Set the position. The position could be a string or int. If the pos[0] or pos[1] is a 
     string, the only possible it that the horizontal/vertical pos is in the center otherwise
