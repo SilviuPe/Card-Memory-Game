@@ -1,2 +1,2 @@
-CARD_IMAGE = 'newimg.png'
+CARD_IMAGE = 'assets/card_image.png'
 FONT_PATH = 'assets/Kalam-Regular.ttf'

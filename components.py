@@ -14,10 +14,9 @@ class Image:
         # initiate image & its properties
 
         # Initiate the image and convert it.
-        self.image = pygame.image.load(image_path).convert_alpha() 
+        self.image = pygame.image.load(image_path)
+        self.image.set_alpha(self.opacity)
         self.get_position()
-        #if self.rotation_angle:
-            #self.image = pygame.transform.rotate(self.image,self.rotation_angle)
 
 
 
@@ -40,8 +39,7 @@ class Image:
 
     
     def display_image(self) -> None:
-        self.image.set_alpha(self.opacity)
-        self.screen.blit(self.image,self.position)
+        self.screen.blit(self.image,tuple(self.position))
 
 """
 centerXcenter
