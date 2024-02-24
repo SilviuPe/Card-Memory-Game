@@ -40,13 +40,12 @@ class Main:
 
     def timer(self):
         self.time = self.time - timedelta(seconds=1)
-        print(str(self.time)[-5:])
 
     def gameplay_screen(self) -> None:
         self.count = pygame.USEREVENT + 0
         pygame.time.set_timer(self.count,1000)
-        self.time = datetime.strptime("01:00","%M:%S")
-
+        self.time = datetime.strptime("00:05","%M:%S")
+        self.timer_text = Pharagraph(str(self.time)[-5:],FONT_PATH,24,[20,20],(255,255,255),self.screen)
         while self.running:
 
             for event in pygame.event.get():
@@ -55,6 +54,16 @@ class Main:
                     pygame.quit()
                 if event.type == self.count:
                     self.timer()
+                    self.timer_text.change_text(str(self.time)[-5:])
+            
+            self.display_gameplay_assets()
+
+
+    def display_gameplay_assets(self):
+        self.screen.fill((0,0,0))
+        self.timer_text.display_text()
+        pygame.display.update()
+
 
     def display_home_assets(self) -> None:
         self.screen.fill((0,0,0)) # fill the background
