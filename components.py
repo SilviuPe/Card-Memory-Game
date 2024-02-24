@@ -75,27 +75,33 @@ class Pharagraph:
         self.set_position()
         self.rect = [self.text.get_size()[0],self.text.get_size()[1]]
 
-    def set_position(self) -> None:
 
+    def change_text(self,updated_text) -> None:
+        self.text = pygame.font.Font(self.font,self.size).render(updated_text,True,self.color)
+        self.set_position()
+
+    def set_position(self) -> None:
+        
+        self.rect_position = [0,0]
         if self.position[0] == "center":
-            self.position[0] = self.surface.get_size()[0] // 2 - self.text.get_size()[0] // 2
+            self.rect_position[0] = self.surface.get_size()[0] // 2 - self.text.get_size()[0] // 2
         if self.position[0] != "center":
-            self.position[0] = int(self.position[0])
+            self.rect_position[0] = int(self.position[0])
 
 
         if self.position[1] == "center":
-            self.position[1] = self.surface.get_size()[1] // 2 - self.text.get_size()[1] // 2
+            self.rect_position[1] = self.surface.get_size()[1] // 2 - self.text.get_size()[1] // 2
         if self.position[1] != "center":
-            self.position[1] = int(self.position[1])
+            self.rect_position[1] = int(self.position[1])
 
     def display_text(self) -> None:
-        self.surface.blit(self.text,self.position)
+        self.surface.blit(self.text,self.rect_position)
 
     def on_press(self) -> bool:
         x_pos,y_pos = pygame.mouse.get_pos()
 
-        if x_pos >= self.position[0] and x_pos <= self.position[0] + self.rect[0]:
-            if y_pos >= self.position[1] and y_pos <= self.position[1] + self.rect[1]:
+        if x_pos >= self.rect_position[0] and x_pos <= self.rect_position[0] + self.rect[0]:
+            if y_pos >= self.rect_position[1] and y_pos <= self.rect_position[1] + self.rect[1]:
                 return True 
             
         return False 
