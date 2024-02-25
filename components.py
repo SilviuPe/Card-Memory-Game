@@ -49,8 +49,11 @@ class Image:
             self.position[1] = int(self.position[1])
 
     
-    def display_image(self) -> None:
-        self.screen.blit(self.image,tuple(self.position))
+    def display_image(self,position = None) -> None:
+        if position:
+            self.screen.blit(self.image,tuple(position))
+        else:
+            self.screen.blit(self.image,tuple(self.position))
 
 """
 centerXcenter
